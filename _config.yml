@@ -32,7 +32,7 @@ baseurl: /
 github_username:  hankwashere
 
 # Build settings
-theme: minima
+theme: midnight
 plugins:
   - jekyll-feed
 
