@@ -2,7 +2,7 @@
 layout: post
 title: "testing post"
 date:  2026-05-29 12:37:26 -0700
-categories: CATEGORY-1 CATEGORY-2
+categories: category-test
 ---
 
 jkasfdkhjlsklashfjkhjksfasddasfsfasdfdfasdfasd
