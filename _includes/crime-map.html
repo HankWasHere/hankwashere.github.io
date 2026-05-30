@@ -219,8 +219,9 @@ function addMarkersToMap(markerData, mapInstance) {
         markerData[i].forEach(function(marker) {
             var popup = L.popup().setContent(marker.popup);
             L.marker(marker.coords, { icon: makeAwesomeIcon(marker.color, marker.icon) } )
-              .bindPopup(popup)
-              .addTo(group);
+                .bindPopup(popup)
+                .addTo(group);
+            marker._leafletMarker = leafletMarker;
         });
         markerGroups.push(group);
     }
@@ -243,6 +244,17 @@ function updateLegend(markers) {
               + '</div>';
     });
     content.innerHTML = html;
+
+    content.querySelectorAll('.legend-row').forEach(function(row) {
+        var index = parseInt(row.getAttribute('data-marker-index'), 10);
+        var marker = markers[index];
+        row.addEventListener('click', function() {
+            if (marker._leafletMarker) {
+                mapInstance.setView(marker.coords, mapInstance.setZoom(15));
+                marker._leafletMarker.openPopup();
+            }
+        });
+    });
 }
 
 document.addEventListener("DOMContentLoaded", function() {
