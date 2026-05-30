@@ -250,7 +250,7 @@ function updateLegend(markers, mapInstance) {
         var marker = markers[index];
         row.addEventListener('click', function() {
             if (marker._leafletMarker) {
-                mapInstance.setView(marker.coords, mapInstance.setZoom(15));
+                mapInstance.setView(marker.coords, mapInstance.getZoom());
                 marker._leafletMarker.openPopup();
             }
         });
