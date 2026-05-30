@@ -218,7 +218,7 @@ function addMarkersToMap(markerData, mapInstance) {
         var group = L.layerGroup();
         markerData[i].forEach(function(marker) {
             var popup = L.popup().setContent(marker.popup);
-            L.marker(marker.coords, { icon: makeAwesomeIcon(marker.color, marker.icon) } )
+            var leafletMarker = L.marker(marker.coords, { icon: makeAwesomeIcon(marker.color, marker.icon) } )
                 .bindPopup(popup)
                 .addTo(group);
             marker._leafletMarker = leafletMarker;
@@ -228,16 +228,16 @@ function addMarkersToMap(markerData, mapInstance) {
     return markerGroups;
 }
 
-function updateLegend(markers) {
+function updateLegend(markers, mapInstance) {
     var content = document.getElementById('legend-content');
     if (!markers || markers.length === 0) {
         content.innerHTML = '<span class="legend-empty">No incidents on this date.</span>';
         return;
     }
     var html = '';
-    markers.forEach(function(marker) {
+    markers.forEach(function(marker, index) {
         var hex = markerColorMap[marker.color] || '#575757';
-        html += '<div class="legend-row">'
+        html += '<div class="legend-row" data-marker-index="' + index + '" style="cursor:pointer;">'
               + '<span class="legend-dot" style="background:' + hex + ';"></span>'
               + '<i class="fa fa-' + marker.icon + '" style="color:' + hex + '; width:14px; text-align:center;"></i>'
               + '&nbsp;<span>' + marker.crime_type + '</span>'
