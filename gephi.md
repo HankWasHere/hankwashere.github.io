@@ -1,5 +1,5 @@
 ---
-layout: xml
+layout: crime-map-layout
 title: "gephi"
 permalink: /gephi
 ---
