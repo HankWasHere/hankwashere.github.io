@@ -36,6 +36,7 @@ timezone: America/Los_Angeles
 theme: minima
 plugins:
   - jekyll-feed
+  - jekyll-gist
 
 # permalink: /:categories/:year/:month/:day/:title:output_ext
 
