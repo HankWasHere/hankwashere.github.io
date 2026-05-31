@@ -37,7 +37,8 @@ theme: minima
 plugins:
   - jekyll-feed
   - jekyll-gist
-
+gist:
+  noscript: false
 # permalink: /:categories/:year/:month/:day/:title:output_ext
 
 
