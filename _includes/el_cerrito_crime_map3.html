@@ -656,20 +656,31 @@ function setSpeed(ms, btn) {
   btn.classList.add('active');
 }
 
-// Dual slider range fill visual update
+// 1. Create a tracking variable outside the function to persist the state
+let previousHigh = null;
+
 function updateRangeFill() {
   const sliderStart = document.getElementById('time-slider-start');
   const sliderEnd   = document.getElementById('time-slider-end');
   const fill = document.getElementById('range-fill');
   if (!sliderStart || !sliderEnd || !fill) return;
+
   const max  = parseInt(sliderStart.max, 10) || 1;
-  const low  = parseInt(sliderStart.value, 10);
   const high = parseInt(sliderEnd.value, 10);
+
+  // 2. Use the previous high if it exists; otherwise, fall back to the current start value
+  const low = (previousHigh !== null) ? previousHigh : parseInt(sliderStart.value, 10);
+
+  // 3. Update the tracking variable for the NEXT time the function runs
+  previousHigh = high;
+
   const pctLow  = (low  / max) * 100;
   const pctHigh = (high / max) * 100;
+  
   fill.style.left  = pctLow + '%';
   fill.style.width = (pctHigh - pctLow) + '%';
 }
+
 
 // Dual slider drag
 document.getElementById('time-slider-start').addEventListener('input', e => {
