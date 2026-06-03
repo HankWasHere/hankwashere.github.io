@@ -662,29 +662,18 @@ function setSpeed(ms, btn) {
   btn.classList.add('active');
 }
 
-// Keep track of the starting position of sliderEnd before it changes
-let lastStableEndValue = parseInt(document.getElementById('time-slider-end')?.value, 10) || 0;
 
+// Dual slider range fill visual update
 function updateRangeFill() {
   const sliderStart = document.getElementById('time-slider-start');
   const sliderEnd   = document.getElementById('time-slider-end');
   const fill = document.getElementById('range-fill');
   if (!sliderStart || !sliderEnd || !fill) return;
-
-  const max = parseInt(sliderStart.max, 10) || 1;
+  const max  = parseInt(sliderStart.max, 10) || 1;
+  const low  = parseInt(sliderStart.value, 10);
   const high = parseInt(sliderEnd.value, 10);
-
-  // 1. Force the start handle to exactly where the end handle just was
-  const low = lastStableEndValue;
-  sliderStart.value = low;
-
-  // 2. Update our tracker so it is ready for the next interaction
-  lastStableEndValue = high;
-
-  // 3. Calculate percentages and move the visual fill bar
   const pctLow  = (low  / max) * 100;
   const pctHigh = (high / max) * 100;
-  
   fill.style.left  = pctLow + '%';
   fill.style.width = (pctHigh - pctLow) + '%';
 }
