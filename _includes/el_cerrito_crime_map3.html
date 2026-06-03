@@ -595,12 +595,18 @@ function gotoIndex(i) {
 function stepForward() {
   if (state.timeIndexEnd < timeBuckets.length - 1) {
     state.timeIndexEnd = state.timeIndexEnd + 1;
-    state.timeIndex    = Math.min(state.timeIndex, state.timeIndexEnd);
+    if (state.playing) {
+      // During playback, start trails end by exactly one period
+      state.timeIndex = Math.max(0, state.timeIndexEnd - 1);
+    } else {
+      state.timeIndex = Math.min(state.timeIndex, state.timeIndexEnd);
+    }
     refreshMap();
   } else {
     pausePlay();
   }
 }
+
 
 function stepBack()  {
   state.timeIndex    = Math.max(0, state.timeIndex - 1);
@@ -625,7 +631,7 @@ function togglePlay() {
 
 function startPlay() {
   if (state.timeIndexEnd >= timeBuckets.length - 1) {
-    state.timeIndex    = 0;
+    state.timeIndex    = 1;
     state.timeIndexEnd = 0;
     refreshMap();
   }
