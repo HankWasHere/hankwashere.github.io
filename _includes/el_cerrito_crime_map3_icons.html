@@ -372,46 +372,46 @@ const BY_DAY = [["2022-02-08", [0, 1, 2, 3, 4]], ["2022-02-09", [5, 6, 7]], ["20
 // CATEGORIES
 // ============================================================
 const CATEGORIES = [
-  { id:'theft',     label:'Theft',             color:'#3A78B8', glyph:'\uf07a',  // fa-shopping-cart
+  { id:'assault',   label:'Assault / Battery',  color:'#eb1c26', glyph:'\ue546',  // fa-person-robbery
+    kw:['assault','battery','criminal threat','brandishing','elder abuse','child abuse','animal cruelty'] },
+  { id:'domestic',  label:'Domestic Violence',  color:'#eb1c26', glyph:'\ue510',  // fa-house-shield
+    kw:['domestic violence','domestic battery','restraining order','court order','prevent person from calling'] },
+  { id:'sexual',    label:'Sex Offenses',       color:'#eb1c26', glyph:'\ue53b',  // fa-person-burst
+    kw:['sexual','indecent','lewd','intimate images','prowling','peeping'] },
+  { id:'weapons',   label:'Weapons',            color:'#ec5824', glyph:'\ue19b',  // fa-gun
+    kw:['firearm','weapon','gun','ammunition','stun gun','brass knuckles','shooting',
+        'burglary tools','pepper spray','tear gas','discharge'] },
+  { id:'arson',     label:'Arson / Fire',       color:'#ec5824', glyph:'\uf06d',  // fa-fire
+    kw:['arson','burning','burn'] }, 
+  { id:'bomb',      label:'Bomb Threat',        color:'#f4ec30', glyph:'\uf1e2',  //fa-bomb
+    kw:['bomb threat','false bomb'] },
+  { id:'burglary',  label:'Burglary',           color:'#f4ec30', glyph:'\ue536',  // fa-person-through-window
+    kw:['burglary','burglery','trespass'] },
+  { id:'robbery',   label:'Robbery',            color:'#f4ec30', glyph:'\ue536',  // fa-person-robbery
+    kw:['robbery','strong arm','strongarm','carjacking','home invasion'] },
+  { id:'theft',     label:'Theft',             color:'#89c73c', glyph:'\uf07a',  // fa-shopping-cart
     kw:['shoplifting','shoplift','organized retail','retail theft','grand theft','petty theft',
         'theft from','theft of','mail theft','package theft','theft by false','theft with',
         'attempted theft','attempted petty','attempted grand','attempt grand','attempt petty',
         'misappropriate','embezzlement','extortion','defraud','theft'] },
-  { id:'burglary',  label:'Burglary',           color:'#67A1D8', glyph:'\ue536',  // fa-person-through-window
-    kw:['burglary','burglery','trespass'] },
-  { id:'vehicle',   label:'Vehicle Crimes',     color:'#234F7E', glyph:'\uf1b9',  // fa-car
+  { id:'vehicle',   label:'Vehicle Crimes',     color:'#89c73c', glyph:'\uf1b9',  // fa-car
     kw:['stolen vehicle','vehicle theft','auto theft','recovered stolen','vehicle tampering',
         'tampering with','tamper with','hit and run','evading','felony evading','impound',
         'license plate','stolen plate'] },
-  { id:'robbery',   label:'Robbery',            color:'#A9C8EA', glyph:'\ue536',  // fa-person-robbery
-    kw:['robbery','strong arm','strongarm','carjacking','home invasion'] },
-  { id:'assault',   label:'Assault / Battery',  color:'#A9C8EA', glyph:'\ue546',  // fa-person-robbery
-    kw:['assault','battery','criminal threat','brandishing','elder abuse','child abuse','animal cruelty'] },
-  { id:'domestic',  label:'Domestic Violence',  color:'#F0C36A', glyph:'\ue510',  // fa-house-shield
-    kw:['domestic violence','domestic battery','restraining order','court order','prevent person from calling'] },
-  { id:'sexual',    label:'Sex Offenses',       color:'#D9741C', glyph:'\ue53b',  // fa-person-burst
-    kw:['sexual','indecent','lewd','intimate images','prowling','peeping'] },
-  { id:'weapons',   label:'Weapons',            color:'#F0C36A', glyph:'\ue19b',  // fa-gun
-    kw:['firearm','weapon','gun','ammunition','stun gun','brass knuckles','shooting',
-        'burglary tools','pepper spray','tear gas','discharge'] },
-  { id:'arson',     label:'Arson / Fire',       color:'#F0C36A', glyph:'\uf06d',  // fa-fire
-    kw:['arson','burning','burn'] }, 
-  { id:'bomb',      label:'Bomb Threat',        color:'#F0C36A', glyph:'\uf1e2',  //fa-bomb
-    kw:['bomb threat','false bomb'] },
-  { id:'fraud',     label:'Fraud / Identity',   color:'#3A78B8', glyph:'\uf2c2',  // fa-id-card
-    kw:['fraud','identity theft','forgery','skimming','skimmer','counterfeit',
-        'false pretense','identifying information','access card','account data','impersonating'] },
-  { id:'drugs',     label:'Drugs',              color:'#3A78B8', glyph:'\uf484',  // fa-pills
-    kw:['drug','narcotic','controlled substance','paraphernalia','possession of'] },
-  { id:'dui',       label:'DUI / Alcohol',      color:'#67A1D8', glyph:'\uf0fc',  // fa-beer
+  { id:'dui',       label:'DUI / Alcohol',      color:'#89c73c', glyph:'\uf0fc',  // fa-beer
     kw:['dui','driving under the influence','drunk driving','public intoxication',
         'drunk in public','open container','intoxicated','alcohol'] },
-  { id:'vandalism', label:'Vandalism',          color:'#3A78B8', glyph:'\uf5bd',  // fa-spray-can
-    kw:['vandalism','graffiti','damage'] },
-  { id:'warrant',   label:'Warrants / Arrest',  color:'#3A78B8', glyph:'\ue4f8',  // fa-handcuffs
+  { id:'warrant',   label:'Warrants / Arrest',  color:'#89c73c', glyph:'\ue4f8',  // fa-handcuffs
     kw:['warrant','probation','parole','loitering','obstruct','resisting','resist',
         'evade police','false identification','false id','false info','arrest'] },
-  { id:'other',     label:'Other',              color:'#c8cedf', glyph:'\uf06a', kw:[] },  // fa-circle-exclamation
+  { id:'drugs',     label:'Drugs',              color:'#7d3e97', glyph:'\uf484',  // fa-pills
+    kw:['drug','narcotic','controlled substance','paraphernalia','possession of'] },
+  { id:'vandalism', label:'Vandalism',          color:'#7d3e97', glyph:'\uf5bd',  // fa-spray-can
+    kw:['vandalism','graffiti','damage'] },
+  { id:'fraud',     label:'Fraud / Identity',   color:'#7d3e97', glyph:'\uf2c2',  // fa-id-card
+    kw:['fraud','identity theft','forgery','skimming','skimmer','counterfeit',
+        'false pretense','identifying information','access card','account data','impersonating'] },
+  { id:'other',     label:'Other',              color:'#7d3e97', glyph:'\uf06a', kw:[] },  // fa-circle-exclamation
 ];
 
 function getCatId(crimeType) {
