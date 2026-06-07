@@ -371,133 +371,48 @@ const BY_DAY = [["2022-02-08", [0, 1, 2, 3, 4]], ["2022-02-09", [5, 6, 7]], ["20
 // ============================================================
 // CATEGORIES
 // ============================================================
-CRIME_ICON_MAP = [
-    # Theft -- retail
-    # Covers: Shoplifting, Shoplift, Organized Retail Theft, Retail Theft
-    (['shoplifting', 'shoplift', 'organized retail',
-      'retail theft'],                               'orange',     'shopping-cart', '\uf07a'),
-
-    # Theft -- general
-    # Covers: Grand Theft, Petty Theft, Theft from Vehicle, Mail Theft,
-    # Package Theft, Theft by False Pretenses, Theft with Priors,
-    # Attempted Theft, Embezzlement, Extortion, Defrauding
-    (['grand theft', 'petty theft', 'theft from',
-      'theft of', 'mail theft', 'package theft',
-      'theft by false', 'theft with', 'attempted theft',
-      'attempted petty', 'attempted grand',
-      'attempt grand', 'attempt petty',
-      'misappropriate', 'embezzlement', 'extortion',
-      'defraud'],                                    'orange',     'people-robbery', '\ue536'),
-
-    # Burglary
-    # Covers: Residential Burglary, Commercial Burglary, Auto Burglary,
-    # Vehicle Burglary, Attempted Burglary, Possession of Burglary Tools
-    (['burglary','trespass', 'burglery',
-      'home invasion'],                       'darkred',    'person-through-window', '\ue5a9'),
-
-    # Vehicle crimes
-    # Covers: Stolen Vehicle, Vehicle Theft, Recovered Stolen Vehicle,
-    # Vehicle Tampering, Hit and Run, Attempted Vehicle Theft, Evading
-    (['stolen vehicle', 'vehicle theft', 'auto theft',
-      'recovered stolen', 'vehicle tampering',
-      'tampering with', 'tamper with',
-      'hit and run', 'evading', 'felony evading',
-      'impound'],                                    'orange',     'car', '\uf1b9'),
-
-    # License plate theft
-    (['license plate', 'stolen plate',
-      'license plates'],                             'orange',     'barcode', '\uf02a'),
-
-    # Robbery and carjacking
-    # Covers: Robbery, Armed Robbery, Strong Armed Robbery, Carjacking,
-    # Home Invasion Robbery, Attempted Robbery
-    (['robbery', 'strong arm',
-      'strongarm', 'carjacking'],                'red',        'person-robbery', '\ue536'),
-
-    # Assault and battery
-    # Covers: Assault, Battery, Assault with a Deadly Weapon, Criminal
-    # Threats, Brandishing, Elder Abuse, Child Abuse, Animal Cruelty,
-    # Shooting into an Inhabited Dwelling
-    (['assault', 'battery', 'criminal threat',
-      'brandishing', 'elder abuse', 'child abuse',
-      'animal cruelty'],                 'red',        'person-robbery', '\ue536'),
-
-    # Domestic violence
-    # Covers: Domestic Violence, Domestic Battery, Restraining Order
-    # Violation, Court Order Violation
-    (['domestic violence', 'domestic battery',
-      'restraining order', 'court order',
-      'prevent person from calling'],                'darkpurple', 'building-shield', '\ue4d8'),
-
-    # Sexual offenses
-    # Covers: Sexual Battery, Sexual Assault, Indecent Exposure,
-    # Lewd Conduct, Distribution of Intimate Images, Prowling/Peeping
-    (['sexual', 'indecent', 'lewd',
-      'intimate images', 'prowling',
-      'peeping'],                                    'darkpurple', 'person-burst', '\ue53b'),
-
-    # Weapons
-    # Covers: Possession of a Firearm, Brandishing a Firearm, Negligent
-    # Discharge, Felon in Possession, Concealed Firearm, Ghost Gun,
-    # Stun Gun, Brass Knuckles, Burglary Tools, Pepper Spray, Tear Gas
-    (['firearm', 'weapon', 'gun', 'ammunition',
-      'stun gun',  'shooting', 'discharge'],                                  'black', 'gun', '\ue19b'),
-      
-      
-    (['brass knuckles', 'burglary tools',
-      'pepper spray', 'tear gas'],                      'cadetblue',      'shield', '\uf132'),
-
-    # Arson and bomb threats
-    # Covers: Arson, Unlawful Burning, Reckless Burning, Illegal Burning,
-    # Bomb Threat, False Bomb Threat
-    (['arson', 'burning', 'burn'],                  'darkred',    'fire', '\uf06d'),
-    (['bomb threat', 'false bomb'],                  'darkred',    'bomb', '\uf1e2'),
-
-    # Fraud and financial crimes
-    # Covers: Fraud, Identity Theft, Forgery, Skimming Device, Card
-    # Skimmer, Counterfeit Bills, Fraudulent Use of Credit Cards,
-    # Obtaining Property by False Pretenses, Use of Identifying Information
-    (['fraud', 'identity theft', 'forgery',
-      'skimming', 'skimmer', 'counterfeit',
-      'false pretense', 'identifying information',
-      'access card', 'account data',
-      'impersonating'],                    'gray',       'credit-card', '\uf09d'),
-
-    # Drugs and narcotics
-    # Covers: Possession of Drug Paraphernalia, Possession of Narcotics,
-    # Possession of Controlled Substance, Drugs for Sale
-    (['drug', 'narcotic', 'controlled substance',
-      'paraphernalia', 'possession of'],             'purple',     'pills', '\uf484'),
-
-    # Alcohol and DUI
-    # Covers: DUI, Driving Under the Influence, Public Intoxication,
-    # Drunk in Public, Open Container, Biking while intoxicated
-    (['dui', 'driving under the influence',
-      'drunk driving', 'public intoxication',
-      'drunk in public', 'open container',
-      'intoxicated', 'alcohol'],                     'darkpurple', 'beer', '\uf0fc'),
-
-    # Trespass, warrants, and obstruction
-    # Covers: Trespassing, Warrant Arrest, Probation Violation, Parole
-    # Violation, Loitering, Obstruction, Resisting Arrest, False ID
-    ([ 'warrant', 'probation',
-      'parole', 'loitering', 'obstruct',
-      'resisting', 'resist', 'evade police',
-      'false identification', 'false id',
-      'false info'],                                 'cadetblue',  'shield', '\uf132'),
-
-    # Vandalism
-    # Covers: Vandalism, Graffiti, Property Damage
-    (['vandalism', 'graffiti', 'damage'],            'green',      'spray-can-sparkles', '\uf5d0'),
-
-    # Suspicious and miscellaneous
-    # Covers: Suspicious Circumstance, Suspicious Package, Hate Crime,
-    # Harassing Phone Calls, Public Nuisance
-    (['suspicious', 'hate crime', 'harassing',
-      'nuisance'],                                   'lightgray',  'person-harassing', '\ue549'),
-]
-
-DEFAULT_ICON = ('gray', 'exclamation-circle', '\uf06a')
+const CATEGORIES = [
+  { id:'theft',     label:'Theft',             color:'#3A78B8', glyph:'\uf07a',  // fa-shopping-cart
+    kw:['shoplifting','shoplift','organized retail','retail theft','grand theft','petty theft',
+        'theft from','theft of','mail theft','package theft','theft by false','theft with',
+        'attempted theft','attempted petty','attempted grand','attempt grand','attempt petty',
+        'misappropriate','embezzlement','extortion','defraud','theft'] },
+  { id:'burglary',  label:'Burglary',           color:'#67A1D8', glyph:'\ue536',  // fa-person-through-window
+    kw:['burglary','burglery','trespass'] },
+  { id:'vehicle',   label:'Vehicle Crimes',     color:'#234F7E', glyph:'\uf1b9',  // fa-car
+    kw:['stolen vehicle','vehicle theft','auto theft','recovered stolen','vehicle tampering',
+        'tampering with','tamper with','hit and run','evading','felony evading','impound',
+        'license plate','stolen plate'] },
+  { id:'robbery',   label:'Robbery',            color:'#A9C8EA', glyph:'\ue536',  // fa-person-robbery
+    kw:['robbery','strong arm','strongarm','carjacking','home invasion'] },
+  { id:'assault',   label:'Assault / Battery',  color:'#A9C8EA', glyph:'\ue546',  // fa-person-robbery
+    kw:['assault','battery','criminal threat','brandishing','elder abuse','child abuse','animal cruelty'] },
+  { id:'domestic',  label:'Domestic Violence',  color:'#F0C36A', glyph:'\ue510',  // fa-house-shield
+    kw:['domestic violence','domestic battery','restraining order','court order','prevent person from calling'] },
+  { id:'sexual',    label:'Sex Offenses',       color:'#D9741C', glyph:'\ue53b',  // fa-person-burst
+    kw:['sexual','indecent','lewd','intimate images','prowling','peeping'] },
+  { id:'weapons',   label:'Weapons',            color:'#F0C36A', glyph:'\ue19b',  // fa-gun
+    kw:['firearm','weapon','gun','ammunition','stun gun','brass knuckles','shooting',
+        'burglary tools','pepper spray','tear gas','discharge'] },
+  { id:'arson',     label:'Arson / Fire',       color:'#F0C36A', glyph:'\uf06d',  // fa-fire
+    kw:['arson','burning','burn'] }, 
+  { id:'bomb',      label:'Bomb Threat',        color:'#F0C36A', glyph:'\uf1e2',  //fa-bomb
+    kw:['bomb threat','false bomb'] },
+  { id:'fraud',     label:'Fraud / Identity',   color:'#3A78B8', glyph:'\uf2c2',  // fa-id-card
+    kw:['fraud','identity theft','forgery','skimming','skimmer','counterfeit',
+        'false pretense','identifying information','access card','account data','impersonating'] },
+  { id:'drugs',     label:'Drugs',              color:'#3A78B8', glyph:'\uf484',  // fa-pills
+    kw:['drug','narcotic','controlled substance','paraphernalia','possession of'] },
+  { id:'dui',       label:'DUI / Alcohol',      color:'#67A1D8', glyph:'\uf0fc',  // fa-beer
+    kw:['dui','driving under the influence','drunk driving','public intoxication',
+        'drunk in public','open container','intoxicated','alcohol'] },
+  { id:'vandalism', label:'Vandalism',          color:'#3A78B8', glyph:'\uf5bd',  // fa-spray-can
+    kw:['vandalism','graffiti','damage'] },
+  { id:'warrant',   label:'Warrants / Arrest',  color:'#3A78B8', glyph:'\ue4f8',  // fa-handcuffs
+    kw:['warrant','probation','parole','loitering','obstruct','resisting','resist',
+        'evade police','false identification','false id','false info','arrest'] },
+  { id:'other',     label:'Other',              color:'#c8cedf', glyph:'\uf06a', kw:[] },  // fa-circle-exclamation
+];
 
 function getCatId(crimeType) {
   const lower = (crimeType || '').toLowerCase();
