@@ -450,7 +450,7 @@ const state = {
 // Current time-bucket arrays: [ [key, [recordIndices]], ... ]
 let timeBuckets = BY_MONTH;
 
-const map = L.map('map', { center:[37.9188,-122.3063], zoom:14.5 });
+const map = L.map('map', { center:[37.9188,-122.3063], zoom:13.5 });
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution:'&copy; OpenStreetMap &copy; CARTO',
@@ -511,7 +511,7 @@ function makeMarker(r) {
   const icon = L.divIcon({
     html: pinHtml,
     className: '',
-    iconSize: [28, 36],
+    iconSize: [100, 100],
     iconAnchor: [14, 36],
     popupAnchor: [0, -36],
   });
