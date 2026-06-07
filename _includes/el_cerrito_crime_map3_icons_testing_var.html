@@ -450,7 +450,7 @@ const state = {
 // Current time-bucket arrays: [ [key, [recordIndices]], ... ]
 let timeBuckets = BY_MONTH;
 
-const map = L.map('map', { center:[37.9106,-122.3061], zoom:14 });
+const map = L.map('map', { center:[37.9188,-122.3063], zoom:14.5 });
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution:'&copy; OpenStreetMap &copy; CARTO',
@@ -498,7 +498,7 @@ function makeMarker(r) {
   const glyph = cat ? cat.glyph : '\uf059';
 
   const pinHtml = `
-    <svg width="500" height="500" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg"
+    <svg width="28" height="36" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg"
           style="filter:drop-shadow(0 2px 3px rgba(0,0,0,0.55));overflow:visible;">
       <path d="M14 0 C6.268 0 0 6.268 0 14 C0 22 14 36 14 36 C14 36 28 22 28 14 C28 6.268 21.732 0 14 0 Z"
             fill="${color}" fill-opacity="0.92"/>
@@ -511,7 +511,7 @@ function makeMarker(r) {
   const icon = L.divIcon({
     html: pinHtml,
     className: '',
-    iconSize: [500, 500],
+    iconSize: [28, 36],
     iconAnchor: [14, 36],
     popupAnchor: [0, -36],
   });
