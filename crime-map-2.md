@@ -4,4 +4,4 @@ title: "Crime Map 2.0"
 permalink: /crime-map-glow-up
 ---
 
-{% include el_cerrito_crime_map3.html %}
+{% include el_cerrito_crime_map3_iconsV2.html %}
