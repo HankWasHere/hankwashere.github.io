@@ -1,7 +1,7 @@
 ---
 layout: crime-map-layout
-title: "Crime Map"
-permalink: /crime-map
+title: "Crime Map -testing"
+permalink: /crime-map-testing
 ---
 
-{% include crime-map.html %}
+{% include el_cerrito_crime_map3_icons_testing_var.html %}
