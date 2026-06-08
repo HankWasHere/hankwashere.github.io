@@ -679,8 +679,8 @@ function togglePlay() {
 
 function startPlay() {
   if (state.timeIndexEnd >= timeBuckets.length - 1) {
-    state.timeIndex    = 0;
-    state.timeIndexEnd = 1;
+    state.timeIndex    = 1;
+    state.timeIndexEnd = 0;
     refreshMap();
   }
   state.playing = true;
