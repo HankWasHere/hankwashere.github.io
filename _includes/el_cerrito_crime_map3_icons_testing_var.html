@@ -383,7 +383,7 @@ const CATEGORIES = [
   { id:'weapons',   label:'Weapons',            color:'#ec5824', glyph:'\ue19b',  // fa-gun
     kw:['firearm','weapon','gun','ammunition','stun gun','brass knuckles','shooting',
         'burglary tools','pepper spray','tear gas','discharge'] },
-  { id:'arson',     label:'Arson / Fire',       color:'#ec5824', glyph:'\uf06d',  // fa-fire
+  { id:'arson',     label:'Arson / Fire',       color:'#f7941d', glyph:'\uf06d',  // fa-fire
     kw:['arson','burning','burn'] }, 
   { id:'bomb',      label:'Bomb Threat',        color:'#f7941d', glyph:'\uf1e2',  //fa-bomb
     kw:['bomb threat','false bomb'] },
@@ -403,10 +403,10 @@ const CATEGORIES = [
   { id:'dui',       label:'DUI / Alcohol',      color:'#89c73c', glyph:'\uf0fc',  // fa-beer
     kw:['dui','driving under the influence','drunk driving','public intoxication',
         'drunk in public','open container','intoxicated','alcohol'] },
-  { id:'warrant',   label:'Warrants / Arrest',  color:'#89c73c', glyph:'\ue4f8',  // fa-handcuffs
+  { id:'warrant',   label:'Warrants / Arrest',  color:'#15a79c', glyph:'\ue4f8',  // fa-handcuffs
     kw:['warrant','probation','parole','loitering','obstruct','resisting','resist',
         'evade police','false identification','false id','false info','arrest'] },
-  { id:'drugs',     label:'Drugs',              color:'#7d3e97', glyph:'\uf484',  // fa-pills
+  { id:'drugs',     label:'Drugs',              color:'#15a79c', glyph:'\uf484',  // fa-pills
     kw:['drug','narcotic','controlled substance','paraphernalia','possession of'] },
   { id:'vandalism', label:'Vandalism',          color:'#7d3e97', glyph:'\uf5bd',  // fa-spray-can
     kw:['vandalism','graffiti','damage'] },
@@ -723,11 +723,11 @@ function updateRangeFill() {
   const high = parseInt(sliderEnd.value, 10);
 
   // 1. Force the start handle to exactly where the end handle just was
-  const low = lastStableEndValue;
-  sliderStart.value = low;
+  //const low = lastStableEndValue;
+  //sliderStart.value = low;
 
   // 2. Update our tracker so it is ready for the next interaction
-  lastStableEndValue = high;
+  //lastStableEndValue = high;
 
   // 3. Calculate percentages and move the visual fill bar
   const pctLow  = (low  / max) * 100;
