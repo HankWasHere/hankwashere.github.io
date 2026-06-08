@@ -721,9 +721,9 @@ function updateRangeFill() {
 
   const max = parseInt(sliderStart.max, 10) || 1;
   const high = parseInt(sliderEnd.value, 10);
-
+  const low  = parseInt(sliderStart.value, 10);
   // 1. Force the start handle to exactly where the end handle just was
-  const low = lastStableEndValue;
+  //const low = lastStableEndValue;
   // sliderStart.value = low;
 
   // 2. Update our tracker so it is ready for the next interaction
