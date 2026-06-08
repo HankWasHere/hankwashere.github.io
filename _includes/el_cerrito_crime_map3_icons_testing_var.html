@@ -711,7 +711,7 @@ function setSpeed(ms, btn) {
 }
 
 // Keep track of the starting position of sliderEnd before it changes
-// let lastStableEndValue = parseInt(document.getElementById('time-slider-end')?.value, 10) || 0;
+let lastStableEndValue = parseInt(document.getElementById('time-slider-end')?.value, 10) || 0;
 
 function updateRangeFill() {
   const sliderStart = document.getElementById('time-slider-start');
