@@ -711,7 +711,7 @@ function setSpeed(ms, btn) {
 }
 
 // Keep track of the starting position of sliderEnd before it changes
-let lastStableEndValue = parseInt(document.getElementById('time-slider-end')?.value, 10) || 0;
+// let lastStableEndValue = parseInt(document.getElementById('time-slider-end')?.value, 10) || 0;
 
 function updateRangeFill() {
   const sliderStart = document.getElementById('time-slider-start');
@@ -723,11 +723,11 @@ function updateRangeFill() {
   const high = parseInt(sliderEnd.value, 10);
 
   // 1. Force the start handle to exactly where the end handle just was
-  //const low = lastStableEndValue;
-  //sliderStart.value = low;
+  const low = lastStableEndValue;
+  sliderStart.value = low;
 
   // 2. Update our tracker so it is ready for the next interaction
-  //lastStableEndValue = high;
+  lastStableEndValue = high;
 
   // 3. Calculate percentages and move the visual fill bar
   const pctLow  = (low  / max) * 100;
