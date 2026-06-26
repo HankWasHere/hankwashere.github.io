@@ -1,4 +1,5 @@
-<!doctype html>
+---
+---
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,6 +11,7 @@
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
@@ -340,11 +342,16 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: var(--san
 // ============================================================
 // DATA
 // ============================================================
-const CRIME_DATA  = ;
-const BY_MONTH    = ;
-const BY_WEEK     = ;
-const BY_DAY      = ;
+  const CRIME_DATA = {{ site.data.crime_data | jsonify }};
+  const BY_DAY = {{ site.data.by_day | jsonify }};
+  const BY_MONTH = {{ site.data.by_month | jsonify }};
+  const BY_WEEK = {{ site.data.by_week | jsonify }};
 
+
+// ============================================================
+// El Cerrito city boundary loaded from _data/ec_boundary.json (approximate polygon from official boundary data)
+// ============================================================
+  const EC_BOUNDARY_GEOJSON = {{ site.data.ec_boundary | jsonify }};
 // ============================================================
 // CATEGORIES
 // ============================================================
@@ -428,15 +435,12 @@ let timeBuckets = BY_MONTH;
 // ============================================================
 // MAP
 // ============================================================
-const map = L.map('map', { center:[37.9106,-122.3061], zoom:14 });
+const map = L.map('map', { center:[37.9188,-122.3063], zoom:14 });
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
   attribution:'&copy; OpenStreetMap &copy; CARTO',
   subdomains:'abcd', maxZoom:20,
 }).addTo(map);
-
-// El Cerrito city boundary (approximate polygon from official boundary data)
-
 
   
 L.geoJSON(EC_BOUNDARY_GEOJSON, {
@@ -457,18 +461,36 @@ function escHtml(s) {
 }
 
 function makeMarker(r) {
-  const cat = CATEGORIES.find(c => c.id === r.catId);
+  const cat   = CATEGORIES.find(c => c.id === r.catId);
   const color = cat ? cat.color : '#505070';
-  const m = L.circleMarker([r.latitude, r.longitude], {
-    radius:6, fillColor:color, color:'rgba(0,0,0,0.35)',
-    weight:1, fillOpacity:0.88,
+  const glyph = cat ? cat.glyph : '\uf059';
+
+  const pinHtml = `
+    <svg width="35" height="45" viewBox="0 0 28 36" xmlns="http://www.w3.org/2000/svg"
+          style="filter:drop-shadow(0 2px 3px rgba(0,0,0,0.55));overflow:visible;">
+      <path d="M14 0 C6.268 0 0 6.268 0 14 C0 22 14 36 14 36 C14 36 28 22 28 14 C28 6.268 21.732 0 14 0 Z"
+            fill="${color}" fill-opacity="0.92"/>
+      <circle cx="14" cy="14" r="11.5" fill="rgba(0,0,0,0.42)"/>
+      <text x="14" y="20" text-anchor="middle"
+            font-family="'Font Awesome 6 Free'" font-weight="900"
+            font-size="14" fill="#ffffff">${glyph}</text>
+    </svg>`;
+
+  const icon = L.divIcon({
+    html: pinHtml,
+    className: '',
+    iconSize: [35, 45],
+    iconAnchor: [17.5, 45],
+    popupAnchor: [0, -45],
   });
+
+  const m = L.marker([r.latitude, r.longitude], { icon });
   m.bindPopup(`
     <div class="popup-crime-type" style="color:${color}">${escHtml(r.CrimeType)}</div>
     <div class="popup-field"><span class="popup-label">Date</span><span class="popup-value">${r.date}</span></div>
     <div class="popup-field"><span class="popup-label">Location</span><span class="popup-value">${escHtml(r.Location)}</span></div>
     <div class="popup-desc">${escHtml(r.Description)}</div>
-  `, { maxWidth:320 });
+  `, { maxWidth: 320 });
   return m;
 }
 
@@ -512,8 +534,16 @@ function refreshMap() {
   const sliderEnd   = document.getElementById('time-slider-end');
   sliderStart.max   = maxIdx;
   sliderEnd.max     = maxIdx;
-  sliderStart.value = state.timeIndex;
-  sliderEnd.value   = state.timeIndexEnd;
+
+  // Only force the slider values if they are out of sync with the state
+  // This prevents the handles from snapping back while you drag them past each other
+  const val1 = parseInt(sliderStart.value, 10);
+  const val2 = parseInt(sliderEnd.value, 10);
+  if (Math.min(val1, val2) !== state.timeIndex || Math.max(val1, val2) !== state.timeIndexEnd) {
+    sliderStart.value = state.timeIndex;
+    sliderEnd.value   = state.timeIndexEnd;
+  }
+
   updateRangeFill();
 
   if (state.activeLayer === 'markers') {
@@ -655,52 +685,46 @@ function setSpeed(ms, btn) {
   document.querySelectorAll('.speed-btn[data-speed]').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
 }
-// Attempting slider to more both ways on overlap
 
-
-
-//const sliderStart = document.getElementById('slider-1');
-//const sliderEnd = document.getElementById('slider-2');
-//const fill = document.querySelector('.slider-track');
-
-function updateSlider() {
+// Unified slider drag logic
+function handleSliderInput() {
+  pausePlay();
   const sliderStart = document.getElementById('time-slider-start');
-  const sliderEnd = document.getElementById('time-slider-end');
-  if (!sliderStart || !sliderEnd ) return;
+  const sliderEnd   = document.getElementById('time-slider-end');
 
-  // Enforce boundary logic (prevent passing each other)
-  if (parseInt(sliderStart.value) > parseInt(sliderEnd.value)) {
-    sliderStart.value = sliderEnd.value;
-  }
+  const val1 = parseInt(sliderStart.value, 10);
+  const val2 = parseInt(sliderEnd.value, 10);
 
-  const min = parseFloat(sliderStart.min) || 0;
-  const max = parseFloat(sliderStart.max) || 100;
+  // Allow crossing by dynamically assigning the lower value to start and higher to end
+  state.timeIndex = Math.min(val1, val2);
+  state.timeIndexEnd = Math.max(val1, val2);
   
-  const percentStart = ((sliderStart.value - min) / (max - min)) * 100;
-  const percentEnd = ((sliderEnd.value - min) / (max - min)) * 100;
-
   updateRangeFill();
+  refreshMap();
 }
 
 // Dynamic Z-Index prioritization when thumbs overlap
 function handleOverlap(e) {
+  // 1. Grab the elements using your specific IDs
+  const sliderStart = document.getElementById('time-slider-start');
+  const sliderEnd = document.getElementById('time-slider-end');
   if (!sliderStart || !sliderEnd) return;
   
-  // Get the bounding box of the container to track absolute coordinates
+  // 2. Get the bounding box of the container to track absolute coordinates
   const rect = sliderStart.getBoundingClientRect();
   const clickX = e.clientX - rect.left;
   const width = rect.width;
   
-  // Convert cursor position to a numerical slider value
+  // 3. Convert cursor position to a numerical slider value
   const min = parseFloat(sliderStart.min) || 0;
   const max = parseFloat(sliderStart.max) || 100;
   const hoverValue = min + (clickX / width) * (max - min);
 
-  // Measure the distance from cursor to both thumb values
+  // 4. Measure the distance from cursor to both thumb values
   const distToStart = Math.abs(hoverValue - sliderStart.value);
   const distToEnd = Math.abs(hoverValue - sliderEnd.value);
 
-  // Put the closer thumb on top
+  // 5. Put the closer thumb on top
   if (distToStart < distToEnd) {
     sliderStart.style.zIndex = "3";
     sliderEnd.style.zIndex = "2";
@@ -708,21 +732,24 @@ function handleOverlap(e) {
     sliderStart.style.zIndex = "2";
     sliderEnd.style.zIndex = "3";
   }
-  updateRangeFill();
 }
 
-if (sliderStart && sliderEnd) {
-  sliderStart.addEventListener('input', updateSlider);
-  sliderEnd.addEventListener('input', updateSlider);
+// Bind the event listeners
+const domSliderStart = document.getElementById('time-slider-start');
+const domSliderEnd = document.getElementById('time-slider-end');
+const container = document.querySelector('.slider-container'); 
+
+if (domSliderStart && domSliderEnd) {
+  domSliderStart.addEventListener('input', handleSliderInput);
+  domSliderEnd.addEventListener('input', handleSliderInput);
   
-  // Listen for cursor movements across the container to swap layers preemptively
-  const container = document.querySelector('.slider-container');
+  // The line below binds directly to the div to detect mouse movements before you click [cite: 8, 9]
   if (container) {
     container.addEventListener('mousemove', handleOverlap);
   }
+  
   updateRangeFill();
   refreshMap();
-  updateSlider();
 }
 
 
@@ -733,41 +760,18 @@ function updateRangeFill() {
   const fill = document.getElementById('range-fill');
   if (!sliderStart || !sliderEnd || !fill) return;
   const max  = parseInt(sliderStart.max, 10) || 1;
-  const low  = parseInt(sliderStart.value, 10);
-  const high = parseInt(sliderEnd.value, 10);
+  const val1  = parseInt(sliderStart.value, 10);
+  const val2 = parseInt(sliderEnd.value, 10);
+  // Find true left and right slider positision
+  const low  = Math.min(val1, val2);
+  const high = Math.max(val1, val2);
+  // Fill gap
   const pctLow  = (low  / max) * 100;
   const pctHigh = (high / max) * 100;
   fill.style.left  = pctLow + '%';
   fill.style.width = (pctHigh - pctLow) + '%';
 }
 
-
-// Dual slider drag
-document.getElementById('time-slider-start').addEventListener('input', e => {
-  pausePlay();
-  let val = parseInt(e.target.value, 10);
-  // Prevent start from crossing end
-  if (val > state.timeIndexEnd) {
-    val = state.timeIndexEnd;
-    e.target.value = val;
-  }
-  state.timeIndex = val;
-  updateRangeFill();
-  refreshMap();
-});
-
-document.getElementById('time-slider-end').addEventListener('input', e => {
-  pausePlay();
-  let val = parseInt(e.target.value, 10);
-  // Prevent end from crossing start
-  if (val < state.timeIndex) {
-    val = state.timeIndex;
-    e.target.value = val;
-  }
-  state.timeIndexEnd = val;
-  updateRangeFill();
-  refreshMap();
-});
 
 // ============================================================
 // LAYER TOGGLE
