@@ -452,7 +452,7 @@ L.geoJSON(EC_BOUNDARY_GEOJSON, {
   }
 }).addTo(map);
 
-const clusterGroup = L.markerClusterGroup({ chunkedLoading:false, maxClusterRadius:40 });
+const clusterGroup = L.markerClusterGroup({ chunkedLoading:false, maxClusterRadius:40 , spiderfyDistanceMultiplier:2});
 map.addLayer(clusterGroup);
 let heatLayer = null;
 
