@@ -437,9 +437,10 @@ let timeBuckets = BY_MONTH;
 // ============================================================
 const map = L.map('map', { center:[37.9188,-122.3063], zoom:14 });
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  attribution:'&copy; OpenStreetMap &copy; CARTO',
-  subdomains:'abcd', maxZoom:20,
+L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+  subdomains: ['a','b','c','d'],
+  attribution:'&copy; <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors',
+  maxZoom:20,
 }).addTo(map);
 
   
