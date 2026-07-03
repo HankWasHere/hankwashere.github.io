@@ -486,9 +486,11 @@ function makeMarker(r) {
   });
 
   const m = L.marker([r.latitude, r.longitude], { icon });
+  const businessLine = r.Business ? `<div class="popup-field"><span class="popup-label">Business</span><span class="popup-value">${escHtml(r.Business)}</span></div>` : '';
   m.bindPopup(`
     <div class="popup-crime-type" style="color:${color}">${escHtml(r.CrimeType)}</div>
-    <div class="popup-field"><span class="popup-label">Date</span><span class="popup-value">${r.date}</span></div>
+    <div class="popup-field"><span class="popup-label">Date</span><span class="popup-value">${r.Date}</span></div>
+    ${businessLine}
     <div class="popup-field"><span class="popup-label">Location</span><span class="popup-value">${escHtml(r.Location)}</span></div>
     <div class="popup-desc">${escHtml(r.Description)}</div>
   `, { maxWidth: 320 });
@@ -557,7 +559,7 @@ function refreshMap() {
     if (heatLayer) map.removeLayer(heatLayer);
     const pts = visible.map(r => [r.latitude, r.longitude, 1]);
     heatLayer = L.heatLayer(pts, {
-      radius:11, blur:18, minOpacity:0.35, maxZoom:17,
+      radius:11, blur:15, minOpacity:0.35, maxZoom:20,
       gradient:{ 0.2:'#4f8ef7', 0.4:'#9060c0', 0.6:'#f0c040', 0.8:'#e05a5a', 1.0:'#ff4010' },
     }).addTo(map);
   }
