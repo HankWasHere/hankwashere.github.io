@@ -487,12 +487,15 @@ function makeMarker(r) {
 
   const m = L.marker([r.latitude, r.longitude], { icon });
   const businessLine = r.Business ? `<div class="popup-field"><span class="popup-label">Business</span><span class="popup-value">${escHtml(r.Business)}</span></div>` : '';
+  const timeLine = r.Time ? `<div class="popup-field"><span class="popup-label">Time</span><span class="popup-value">${escHtml(r.Time)}</span></div>` : '';
   m.bindPopup(`
     <div class="popup-crime-type" style="color:${color}">${escHtml(r.CrimeType)}</div>
     <div class="popup-field"><span class="popup-label">Date</span><span class="popup-value">${r.Date}</span></div>
+    ${timeLine}
     ${businessLine}
     <div class="popup-field"><span class="popup-label">Location</span><span class="popup-value">${escHtml(r.Location)}</span></div>
     <div class="popup-desc">${escHtml(r.Description)}</div>
+    <div class="popup-field"><span class="popup-label">Blotter URL</span><span class="popup-value">${r.url}</span></div>
   `, { maxWidth: 320 });
   return m;
 }
