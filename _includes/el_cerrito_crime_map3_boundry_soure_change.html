@@ -453,7 +453,7 @@ L.geoJSON(EC_BOUNDARY_GEOJSON, {
   }
 }).addTo(map);
 
-const clusterGroup = L.markerClusterGroup({ chunkedLoading:false, maxClusterRadius:40 , spiderfyDistanceMultiplier:2});
+const clusterGroup = L.markerClusterGroup({ chunkedLoading:false, maxClusterRadius:40 , spiderfyDistanceMultiplier:1.75});
 map.addLayer(clusterGroup);
 let heatLayer = null;
 
@@ -495,7 +495,7 @@ function makeMarker(r) {
     ${businessLine}
     <div class="popup-field"><span class="popup-label">Location</span><span class="popup-value">${escHtml(r.Location)}</span></div>
     <div class="popup-desc">${escHtml(r.Description)}</div>
-    <div class="popup-field"><span class="popup-label">Blotter URL</span><span class="popup-value">${r.url}</span></div>
+    <div class="popup-field"><span class="popup-label">Blotter URL</span><span class="popup-value"><a href="${r.url}" target="_blank">${r.url}</a></span></div>
   `, { maxWidth: 320 });
   return m;
 }
