@@ -816,7 +816,7 @@ function selectNone() { state.activeCats.clear(); updateCatUI(); refreshMap(); }
 // ============================================================
 const allDates = records.map(r => r.date).sort();
 document.getElementById('hdr-range').textContent =
-  allDates[0].slice(0,7) + ' \u2013 ' + allDates[allDates.length-1].slice(0,7);
+  allDates[0] + ' \u2013 ' + allDates[allDates.length-1];
 document.getElementById('slider-min').textContent = formatPeriodLabel(BY_MONTH[0][0]);
 document.getElementById('slider-max').textContent = formatPeriodLabel(BY_MONTH[BY_MONTH.length-1][0]);
 
