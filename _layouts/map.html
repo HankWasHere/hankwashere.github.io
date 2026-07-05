@@ -5,7 +5,22 @@
 {{ content }}
 
 {% include welcome_modal.html %}
+<style>
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
 
+.modal-window {
+    background: white;
+    padding: 20px;
+}
+</style>
 <script src="{{ '/assets/js/welcome-modal.js' | relative_url }}"></script>
 
 </body>
