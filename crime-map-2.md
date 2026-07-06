@@ -1,5 +1,5 @@
 ---
-layout: map
+layout: crime-map-layout
 title: "Crime Map map"
 permalink: /crime-map-glow-up
 ---
