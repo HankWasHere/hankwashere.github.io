@@ -16,8 +16,23 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+<script src="{{ '/assets/js/welcome-modal.js' | relative_url }}"></script>
 
 <style>
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+}
+
+.modal-window {
+    background: white;
+    padding: 20px;
+}
 :root {
   --bg:         #0b0d12;
   --panel:      #111420;
