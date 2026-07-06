@@ -268,7 +268,7 @@ html, body { width: 100%; height: 100%; overflow: hidden; font-family: var(--san
 .marker-cluster-large  div { background:rgba(224,90,90,.7); }
 .marker-cluster div span { color:#fff; font-family:var(--mono); font-size:11px; }
 
-.leaflet-control-attribution { background:rgba(11,13,18,.85)!important; color:var(--text-muted)!important; }
+.leaflet-control-attribution { background:rgba(11,13,18,0..85)!important; color:var(--text-muted)!important; }
 .leaflet-control-attribution a { color:var(--text-dim)!important; }
 .leaflet-control-zoom a { backbackground: rgb(11 13 18 / 20%) !important;color: #0b0d12 !important;--border)!important; }
 .leaflet-control-zoom a:hover { color: #4f8ef7 !important;t; }
@@ -688,7 +688,7 @@ function stepForward() {
       // During playback, start trails end by exactly one period
       state.timeIndex = Math.max(0, state.timeIndexEnd - 1);
     } else {
-      state.timeIndex = Math.min(state.timeIndex, state.timeIndexEnd);
+      state.timeIndex = Math.min(state.timeIndex + 1 , state.timeIndexEnd);
     }
     refreshMap();
   } else {
