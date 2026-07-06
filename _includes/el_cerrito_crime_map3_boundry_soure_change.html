@@ -485,7 +485,7 @@ let timeBuckets = BY_MONTH;
 const map = L.map('map', { center:[37.9188,-122.3063], zoom:14 });
 
 L.tileLayer('http://tile-{s}.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-  subdomains: ['a','b','c','d'],
+  subdomains: ['a','b','c'],
   attribution:'&copy; <a href="http://www.osm.org" target="_blank">OpenStreetMap</a> contributors',
   maxZoom:17,
 }).addTo(map);
@@ -609,7 +609,7 @@ function refreshMap() {
     if (heatLayer) map.removeLayer(heatLayer);
     const pts = visible.map(r => [r.latitude, r.longitude, 1]);
     heatLayer = L.heatLayer(pts, {
-      radius:11, blur:15, minOpacity:0.35, maxZoom:17,
+      radius:17, blur:15, minOpacity:0.35, maxZoom:16,
       gradient:{ 0.2:'#4f8ef7', 0.4:'#9060c0', 0.6:'#f0c040', 0.8:'#e05a5a', 1.0:'#ff4010' },
     }).addTo(map);
   }
