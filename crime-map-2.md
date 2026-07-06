@@ -1,8 +1,7 @@
 ---
-layout: crime-map-layout
+layout: map
 title: "Crime Map map"
 permalink: /crime-map-glow-up
 ---
 
-{% include welcome-modal.html %}
 {% include el_cerrito_crime_map3_icons.html %}
