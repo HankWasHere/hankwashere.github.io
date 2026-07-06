@@ -1,5 +1,4 @@
 ---
-layout: map
 ---
 <html lang="en">
 <head>
@@ -539,7 +538,7 @@ function makeMarker(r) {
   const timeLine = r.Time ? `<div class="popup-field"><span class="popup-label">Time</span><span class="popup-value">${escHtml(r.Time)}</span></div>` : '';
   m.bindPopup(`
     <div class="popup-crime-type" style="color:${color}">${escHtml(r.CrimeType)}</div>
-    <div class="popup-field"><span class="popup-label">Date</span><span class="popup-value">${r.Date} ${timeLine}</span></div>
+    <div class="popup-field"><span class="popup-label">Date</span><span class="popup-value">${r.date} ${timeLine}</span></div>
     ${businessLine}
     <div class="popup-field"><span class="popup-label">Location</span><span class="popup-value">${escHtml(r.Location)}</span></div>
     <div class="popup-desc">${escHtml(r.Description)}</div>
