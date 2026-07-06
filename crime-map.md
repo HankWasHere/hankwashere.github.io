@@ -1,5 +1,5 @@
 ---
-layout: crime-map-layout
+layout: map
 title: "Crime Map -testing"
 permalink: /crime-map-testing
 ---
