@@ -4,5 +4,5 @@ title: "Crime Map map"
 permalink: /crime-map-glow-up
 ---
 
-{{ welcome-modal }}
+{% include welcome-modal.html %}
 {% include el_cerrito_crime_map3_icons.html %}
