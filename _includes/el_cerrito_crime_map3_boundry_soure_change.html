@@ -592,6 +592,19 @@ function refreshMap() {
   document.getElementById('visible-count').innerHTML =
     '<strong>' + visible.length.toLocaleString() + '</strong> incidents this period';
 
+  // Update category counts based on visible records
+  const catCounts = {};
+  CATEGORIES.forEach(c => catCounts[c.id] = 0);
+  visible.forEach(r => catCounts[r.catId] = (catCounts[r.catId] || 0) + 1);
+
+  document.querySelectorAll('.cat-item').forEach(el => {
+    const cid = el.dataset.catId;
+    const countEl = el.querySelector('.cat-count');
+    if (countEl) {
+      countEl.textContent = (catCounts[cid] || 0).toLocaleString();
+    }
+  });
+  
   // Dual sliders
   const maxIdx = timeBuckets.length - 1;
   const sliderStart = document.getElementById('time-slider-start');
