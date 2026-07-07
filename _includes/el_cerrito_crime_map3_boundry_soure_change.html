@@ -26,7 +26,6 @@
 <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 <script src="{{ '/assets/js/welcome-modal.js' | relative_url }}"></script>
-<script src="{{ '/assets/js/category-update.js' | relative_url }}"></script>
 
 <style>
 .modal-overlay {
@@ -633,8 +632,8 @@ function refreshMap() {
     if (heatLayer) map.removeLayer(heatLayer);
     const pts = visible.map(r => [r.latitude, r.longitude, 1]);
     heatLayer = L.heatLayer(pts, {
-      radius:17, blur:15, minOpacity:0.35, maxZoom:17,
-      gradient:{ 0.2:'#4f8ef7', 0.4:'#9060c0', 0.6:'#f0c040', 0.8:'#e05a5a', 1.0:'#ff4010' },
+      radius:25, blur:15, minOpacity:0.2, maxZoom:17,
+      gradient:{ 0.2: '#ffeda0',0.4: '#feb24c',0.6: '#fd8d3c',0.8: '#f03b20',1.0: '#bd0026'},
     }).addTo(map);
   }
 }
